@@ -1,20 +1,20 @@
-let string = "";
-let buttons = document.querySelectorAll(".button");
-let inputField = document.querySelector("input");
+document.addEventListener("DOMContentLoaded", function () {
+  const display = document.querySelector(".input");
+  const buttons = document.querySelectorAll(".button");
 
-Array.from(buttons).forEach((button) => {
-  button.addEventListener("click", (e) => {
-    if (e.target.innerHTML === "=") {
-      string = eval(string);
-      inputField.value = string;
-    } else if (e.target.innerHTML === "C") {
-      string = "";
-      inputField.value = string;
-      console.log("ok");
-    } else {
-      console.log(e.target);
-      string = string + e.target.innerHTML;
-      inputField.value = string;
-    }
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (button.textContent === "=") {
+        try {
+          display.value = eval(display.value);
+        } catch (error) {
+          display.value = "Error";
+        }
+      } else if (button.textContent === "C") {
+        display.value = "";
+      } else {
+        display.value += button.textContent;
+      }
+    });
   });
 });
